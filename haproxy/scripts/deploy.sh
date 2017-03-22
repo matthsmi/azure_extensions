@@ -12,5 +12,6 @@ tar -zxvf /tmp/loadtest_slash.tar.gz
 
 systemctl restart sssd
 systemctl restart sshd
+systemctl start haproxy
 
 exit 0
