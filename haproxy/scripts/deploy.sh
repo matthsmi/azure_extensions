@@ -36,11 +36,12 @@ setenforce 0
 sysctl -p /etc/sysctl.d/haproxy.conf
 
 #SERVICES="sssd sshd rsyslog haproxy"
-SERVICES="sssd sshd rsyslog docker docker-haproxy.service"
-for service in $SERVICES
-do
-    systemctl enable $service
-    systemctl restart $service
-done
+
+#SERVICES="sssd sshd rsyslog docker docker-haproxy.service"
+#for service in $SERVICES
+#do
+#    systemctl enable $service
+#    systemctl restart $service
+#done
 
 exit 0
