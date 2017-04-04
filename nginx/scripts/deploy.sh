@@ -29,10 +29,10 @@ if [ ! -d /opt ]; then
 fi
 
 if [ ! -d /config ]; then
-    mkdir -p /config/certs /config/conf ; chmod 755 /config /config/conf /config/certs
+    mkdir -p /config/certs /config/conf /config/conf.d ; chmod 755 /config /config/conf /config/certs /config/conf.d
 fi
 
-#FILES="loadtest_slash.tar.gz opt_haproxy.tar.gz"
+#FILES="loadtest_slash.tar.gz opt_nginx.tar.gz"
 FILES="loadtest_slash.tar.gz"
 for file in $FILES
 do
@@ -41,28 +41,22 @@ do
     #rm -f /tmp/$file
 done
 
-#curl -k https://10.13.98.8/ztp/haproxy.cfg > /opt/haproxy/etc
-#curl -k https://10.13.98.8/ztp/haproxy-sysctl.conf > /etc/sysctl.d/haproxy.conf
-#cp /opt/haproxy/systemd/haproxy.service /etc/systemd/system/haproxy.service
-
-curl -k https://10.13.98.8/ztp/haproxy-sysctl.conf > /etc/sysctl.d/haproxy.conf
-curl -k https://10.13.98.8/ztp/docker-haproxy.service > /etc/systemd/system/docker-haproxy.service
-curl -k https://10.13.98.8/ztp/haproxy.cfg > /config/conf/haproxy.cfg
+curl -k https://10.13.98.8/ztp/nginx-sysctl.conf > /etc/sysctl.d/nginx.conf
+curl -k https://10.13.98.8/ztp/docker-nginx.service > /etc/systemd/system/docker-nginx.service
+curl -k https://10.13.98.8/ztp/nginx.conf > /config/nginx.conf
+curl -k https://10.13.98.8/ztp/nginx-default.conf > /config/conf.d/default.conf
 curl -k https://10.13.98.8/ztp/admin_ethos-adobe-net.pem > /config/certs/admin_ethos-adobe-net.pem
 curl -k https://10.13.98.8/ztp/web_wa1dev-ethos-adobe-net.pem > /config/certs/web_wa1dev-ethos-adobe-net.pem
 
 setenforce 0
-sysctl -p /etc/sysctl.d/haproxy.conf
+sysctl -p /etc/sysctl.d/nginx.conf
 
-#SERVICES="sssd sshd rsyslog haproxy"
-
-SERVICES="sssd sshd rsyslog docker docker-haproxy.service"
+SERVICES="sssd sshd rsyslog docker docker-nginx.service"
 for service in $SERVICES
 do
     systemctl enable $service
     systemctl restart $service
 done
-
 
 mv /etc/resolv.conf.bak /etc/resolv.conf
 mv /etc/yum.repos.d/CentOS-Base.repo.bak /etc/yum.repos.d/CentOS-Base.repo
