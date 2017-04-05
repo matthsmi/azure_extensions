@@ -45,8 +45,12 @@ curl -k https://10.13.98.8/ztp/nginx-sysctl.conf > /etc/sysctl.d/nginx.conf
 curl -k https://10.13.98.8/ztp/docker-nginx.service > /etc/systemd/system/docker-nginx.service
 curl -k https://10.13.98.8/ztp/nginx.conf > /config/nginx.conf
 curl -k https://10.13.98.8/ztp/nginx-default.conf > /config/conf.d/default.conf
-curl -k https://10.13.98.8/ztp/admin_ethos-adobe-net.pem > /config/certs/admin_ethos-adobe-net.pem
-curl -k https://10.13.98.8/ztp/web_wa1dev-ethos-adobe-net.pem > /config/certs/web_wa1dev-ethos-adobe-net.pem
+
+# Base Certs/Keys
+curl -k https://10.13.98.8/ztp/admin_ethos-admin-net.chained.crt > /config/certs/admin_ethos-admin-net.chained.crt
+curl -k https://10.13.98.8/ztp/admin_ethos-admin-net.key > /config/certs/admin_ethos-admin-net.key
+curl -k https://10.13.98.8/ztp/web_wa1dev-ethos-adobe-net.chained.crt > /config/certs/web_wa1dev-ethos-adobe-net.chained.crt
+curl -k https://10.13.98.8/ztp/web_wa1dev-ethos-adobe-net.key > /config/certs/web_wa1dev-ethos-adobe-net.key
 
 setenforce 0
 sysctl -p /etc/sysctl.d/nginx.conf
