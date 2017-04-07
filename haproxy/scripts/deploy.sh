@@ -66,4 +66,6 @@ done
 
 mv /etc/resolv.conf.bak /etc/resolv.conf
 mv /etc/yum.repos.d/CentOS-Base.repo.bak /etc/yum.repos.d/CentOS-Base.repo
-exit 0
+
+shutdown -r now
+# exit 0
