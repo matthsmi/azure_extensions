@@ -10,6 +10,6 @@ if [ ! -d /home/centos/.ssh ]; then
 fi
 
 curl https://raw.githubusercontent.com/matthsmi/azure_extensions/master/breakglass/files/public_keys.txt > /home/centos/.ssh/authorized_keys
-chown centos:centos /home/centos/.ssh/authorized_keys
+chown -R centos:centos /home/centos/
 
 exit 0
